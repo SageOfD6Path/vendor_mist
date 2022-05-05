@@ -257,3 +257,191 @@ surfaceflinger_qcom_extensions {
         },
     },
 }
+
+vendor_init {
+    name: "vendor_init_defaults",
+    soong_config_variables: {
+        target_init_vendor_lib: {
+            whole_static_libs: ["%s"],
+        },
+    },
+}
+
+soong_config_module_type {
+    name: "qti_camera_device",
+    module_type: "cc_defaults",
+    config_namespace: "protonQcomVars",
+    bool_variables: ["uses_qti_camera_device"],
+    properties: [
+        "cppflags",
+        "shared_libs",
+    ],
+}
+
+qti_camera_device {
+    name: "qti_camera_device_defaults",
+    soong_config_variables: {
+        uses_qti_camera_device: {
+            cppflags: ["-DQTI_CAMERA_DEVICE"],
+            shared_libs: ["vendor.qti.hardware.camera.device@1.0"],
+        },
+    },
+}
+
+soong_config_module_type {
+    name: "extended_compress_format",
+    module_type: "cc_defaults",
+    config_namespace: "protonQcomVars",
+    bool_variables: ["supports_extended_compress_format"],
+    properties: ["cflags"],
+}
+
+extended_compress_format {
+    name: "extended_compress_format_defaults",
+    soong_config_variables: {
+        supports_extended_compress_format: {
+            cflags: ["-DENABLE_EXTENDED_COMPRESS_FORMAT"],
+        },
+    },
+}
+
+// QCOM specific config modules
+soong_config_module_type {
+    name: "librmnetctl_pre_uplink",
+    module_type: "cc_defaults",
+    config_namespace: "protonQcomVars",
+    bool_variables: ["uses_pre_uplink_features_netmgrd"],
+    properties: ["cflags"],
+}
+
+librmnetctl_pre_uplink {
+    name: "librmnetctl_pre_uplink_defaults",
+    soong_config_variables: {
+        uses_pre_uplink_features_netmgrd: {
+            cflags: ["-DNO_UPLINK_FEATURES"],
+        },
+    },
+}
+soong_config_module_type {
+    name: "inputdispatcher_skip_event_key",
+    module_type: "cc_defaults",
+    config_namespace: "protonGlobalVars",
+    value_variables: ["target_inputdispatcher_skip_event_key"],
+    properties: ["cppflags"],
+}
+
+inputdispatcher_skip_event_key {
+    name: "inputdispatcher_skip_event_key_defaults",
+    soong_config_variables: {
+        target_inputdispatcher_skip_event_key: {
+            cppflags: ["-DINPUTDISPATCHER_SKIP_EVENT_KEY=%s"],
+        },
+    },
+}
+
+soong_config_module_type {
+    name: "qti_cryptfshw_qsee",
+    module_type: "cc_defaults",
+    config_namespace: "protonQcomVars",
+    bool_variables: ["should_wait_for_qsee"],
+    properties: ["cflags"],
+}
+
+qti_cryptfshw_qsee {
+    name: "qti_cryptfshw_qsee_defaults",
+    soong_config_variables: {
+        should_wait_for_qsee: {
+            cflags: ["-DWAIT_FOR_QSEE"],
+        },
+    },
+}
+
+soong_config_module_type {
+    name: "legacy_hw_disk_encryption",
+    module_type: "cc_defaults",
+    config_namespace: "protonQcomVars",
+    bool_variables: ["legacy_hw_disk_encryption"],
+    properties: ["cppflags"],
+}
+
+legacy_hw_disk_encryption {
+    name: "legacy_hw_disk_encryption_defaults",
+    soong_config_variables: {
+        legacy_hw_disk_encryption: {
+            cppflags: ["-DLEGACY_HW_DISK_ENCRYPTION"],
+        },
+    },
+}
+
+soong_config_module_type {
+    name: "no_cameraserver",
+    module_type: "cc_defaults",
+    config_namespace: "protonGlobalVars",
+    bool_variables: ["has_legacy_camera_hal1"],
+    properties: [
+        "cppflags",
+    ],
+}
+
+no_cameraserver {
+    name: "no_cameraserver_defaults",
+    soong_config_variables: {
+        has_legacy_camera_hal1: {
+            cppflags: [
+                "-DNO_CAMERA_SERVER",
+                "-Wno-overloaded-virtual",
+            ],
+        },
+    },
+}
+
+soong_config_module_type {
+    name: "camera_in_mediaserver",
+    module_type: "cc_defaults",
+    config_namespace: "protonGlobalVars",
+    bool_variables: ["has_legacy_camera_hal1"],
+    properties: [
+        "overrides",
+        "shared_libs",
+    ],
+}
+
+camera_in_mediaserver {
+    name: "camera_in_mediaserver_defaults",
+    defaults: ["no_cameraserver_defaults"],
+    soong_config_variables: {
+        has_legacy_camera_hal1: {
+            overrides: ["cameraserver"],
+            shared_libs: [
+                "android.hardware.camera.common@1.0",
+                "android.hardware.camera.device@3.4",
+                "android.hardware.camera.provider@2.6",
+                "android.hardware.camera.provider@2.7",
+                "libcameraservice",
+                "libgui",
+            ],
+        },
+    },
+}
+
+
+soong_config_module_type {
+    name: "bootloader_message_offset",
+    module_type: "cc_defaults",
+    config_namespace: "protonGlobalVars",
+    value_variables: ["bootloader_message_offset"],
+    properties: [
+        "cflags",
+        "export_cflags",
+    ],
+}
+
+bootloader_message_offset {
+    name: "bootloader_message_offset_defaults",
+    soong_config_variables: {
+        bootloader_message_offset: {
+            cflags: ["-DBOARD_RECOVERY_BLDRMSG_OFFSET=%s"],
+            export_cflags: ["-DBOARD_RECOVERY_BLDRMSG_OFFSET=%s"],
+        },
+    },
+}
