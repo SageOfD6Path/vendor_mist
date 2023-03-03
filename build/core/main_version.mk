@@ -4,22 +4,22 @@ ADDITIONAL_SYSTEM_PROPERTIES += \
     ro.build.fingerprint=$(BUILD_FINGERPRINT)
 endif
 
-# LineageOS System Version
+# ProjectMist System Version
 ADDITIONAL_SYSTEM_PROPERTIES += \
-    ro.lineage.version=$(LINEAGE_VERSION) \
-    ro.lineage.releasetype=$(LINEAGE_BUILDTYPE) \
-    ro.lineage.build.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR) \
-    ro.modversion=$(LINEAGE_VERSION) \
-    ro.lineagelegal.url=https://lineageos.org/legal
+    ro.mist.version=$(MIST_VERSION) \
+    ro.mist.releasetype=$(MIST_BUILDTYPE) \
+    ro.mist.build.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR) \
+    ro.modversion=$(MIST_VERSION) \
+    ro.mistlegal.url=https://projectmist.org/legal
 
-# LineageOS Platform Display Version
+# ProjectMist Platform Display Version
 ADDITIONAL_SYSTEM_PROPERTIES += \
-    ro.lineage.display.version=$(LINEAGE_DISPLAY_VERSION)
+    ro.mist.display.version=$(MIST_DISPLAY_VERSION)
 
-# LineageOS Platform SDK Version
+# ProjectMist Platform SDK Version
 ADDITIONAL_SYSTEM_PROPERTIES += \
-    ro.lineage.build.version.plat.sdk=$(LINEAGE_PLATFORM_SDK_VERSION)
+    ro.mist.build.version.plat.sdk=$(MIST_PLATFORM_SDK_VERSION)
 
-# LineageOS Platform Internal Version
+# ProjectMist Platform Internal Version
 ADDITIONAL_SYSTEM_PROPERTIES += \
-    ro.lineage.build.version.plat.rev=$(LINEAGE_PLATFORM_REV)
+    ro.mist.build.version.plat.rev=$(MIST_PLATFORM_REV)
